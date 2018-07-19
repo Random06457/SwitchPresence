@@ -22,8 +22,8 @@ namespace SwitchRichPresence
 
     public class TcpCommand
     {
-        private const uint SRV_MAGIC = 0x11223300;
-        private const uint CLT_MAGIC = 0x33221100;
+        private const uint SRV_MAGIC = 0x11223300;// 53 52 56 00 | "SRV" + 1byte info
+        private const uint CLT_MAGIC = 0x33221100;// 43 4C 54 00 | "CLT" + 1byte info
 
         public enum SendCommandType : byte
         {
@@ -80,7 +80,7 @@ namespace SwitchRichPresence
             while (total < buffer.Length)
             {
                 int count = client.Receive(buffer, total, buffer.Length - total, SocketFlags.None);
-                if (count <= 0)
+                if (count < 0)
                     throw new Exception("Error while receiving data !");
                 total += count;
             }
@@ -119,7 +119,7 @@ namespace SwitchRichPresence
                 while (total < buffer.Length)
                 {
                     int count = client.Send(buffer, total, buffer.Length - total, SocketFlags.None);
-                    if (count <= 0)
+                    if (count < 0)
                         throw new Exception("Error while receiving data !");
                     total += count;
                 }

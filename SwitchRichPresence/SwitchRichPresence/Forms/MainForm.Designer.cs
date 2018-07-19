@@ -121,7 +121,7 @@
             // exportIconsToolStripMenuItem
             // 
             this.exportIconsToolStripMenuItem.Name = "exportIconsToolStripMenuItem";
-            this.exportIconsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.exportIconsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportIconsToolStripMenuItem.Text = "Export icons";
             this.exportIconsToolStripMenuItem.Click += new System.EventHandler(this.exportIconsToolStripMenuItem_Click);
             // 

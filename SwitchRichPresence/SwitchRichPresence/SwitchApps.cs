@@ -25,7 +25,7 @@ namespace SwitchRichPresence
 
     public class SwitchApps : IDisposable
     {
-        private const int CLIENT_VERSION = 1 << 16 | 0 << 8 | 0; //different than the app version
+        private const int CLIENT_VERSION = 1 << 16 | 0 << 8 | 1; //different than the app version
         private Socket client;
         public List<TitleInfo> Applications { get; private set; } = new List<TitleInfo>();
 

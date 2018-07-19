@@ -141,10 +141,6 @@ namespace SwitchRichPresence
         {
             if (button_connect.Text == "Connect")
             {
-                textBox_ip.Enabled = false;
-                utilsToolStripMenuItem.Visible = true;
-                button_connect.Text = "Abort";
-
                 try
                 {
                     apps = new SwitchApps(textBox_ip.Text);
@@ -152,11 +148,17 @@ namespace SwitchRichPresence
                 catch (SocketException)
                 {
                     MessageBox.Show("No switch found !\r\nMake sure that the ip you entered is correct.");
+                    return;
                 }
                 catch (ServerVersionException ex)
                 {
                     MessageBox.Show(ex.Message);
+                    return;
                 }
+
+                textBox_ip.Enabled = false;
+                utilsToolStripMenuItem.Visible = true;
+                button_connect.Text = "Abort";
 
                 UpdatePlaying = new Thread(() => {
                     while (true)
@@ -201,7 +203,7 @@ namespace SwitchRichPresence
                     }
                 }
 
-                MessageBox.Show("Done !");
+                MessageBox.Show("Done!");
             }
         }
 
@@ -236,5 +238,6 @@ namespace SwitchRichPresence
             AboutForm form = new AboutForm();
             form.ShowDialog();
         }
+        
     }
 }
