@@ -26,7 +26,7 @@ kip1=switch-rich-presence.kip
 - Go to [this link](https://discordapp.com/developers/applications/me).
 - Create a new App and give it the name that will be shown on your profile (usually "Nintendo Switch").
 - Enable Rich Presence for you app.
-- Launch the sysmodule and connect the client to the switch (see [Usage](https://github.com/Random0666/SwitchRichPresence/blob/master/README.md#Usage)).
+- Launch the sysmodule and connect the client to the switch (see [Usage](https://github.com/Random0666/SwitchRichPresence/blob/master/README.md#usage)).
 - Once connected, click on `Utils->Export icons` and choose the path where your icons will be exported with the right name/icon size.
 - Go to your rich presence app and add all the icons that you just exported with the name they were given and choose the the type "Large".
 <br><img src="https://raw.githubusercontent.com/Random0666/Useless-stuff/master/SwitchRichPresence/images/upload_assets.png" with = "366" height = "215"><br>
