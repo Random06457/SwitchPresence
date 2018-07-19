@@ -19,7 +19,7 @@ kip1=switch-rich-presence.kip
 - Boot your switch into RCM mode and run hekate on it.
 - Launch your hekate configuration with rich presence and wait until your switch turns on completely. (Also make sure that your switch is connected to internet.)
 - Open the client (`SwitchRichPresence.exe`) and click the "Connect" button.
-- Done !
+- Done!
 
 # Setup a Rich presence app
 *Note : I already made a default application with some games on it but if you don't do this, most of your icons won't show on discord.*
