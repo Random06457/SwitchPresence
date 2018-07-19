@@ -28,4 +28,7 @@ enum
     Error_GetAppPid             = 18,
     Error_GetProcessTid         = 19,
     Error_InitPMINFO            = 20,
+    Error_GetPidList            = 21,
+    Error_GetDebugProc          = 22,
+    Error_CloseHandle           = 23,
 };

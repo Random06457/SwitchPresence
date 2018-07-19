@@ -59,11 +59,16 @@
 			"svcCreateEvent": "0x45",
 			"svcDebugActiveProcess": "0x60",
 			"svcGetDebugEvent": "0x63",
+            "svcGetProcessList" : "0x65",
 			"svcGetThreadList": "0x66",
 			"svcGetDebugThreadContext": "0x67",
 			"svcQueryDebugProcessMemory": "0x69",
 			"svcReadDebugProcessMemory": "0x6a",
 			"svcGetDebugThreadParam": "0x6d"
+		},
+        "debug_flags":	{
+			"allow_debug":	false,
+			"force_debug":	true
 		}
 	}
 }

@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <switch.h>
 #include "utils.h"
+#include "creport_debug_types.h"
 
 
 enum class ClientCommand : u8 {
@@ -28,5 +29,6 @@ enum class ServerCommand : u8 {
     Normal          = 1,
     Confirm         = 2,
 };
+
 
 void StartReceiving(int client);

@@ -5,7 +5,7 @@ const int CLT_MAGIC = 0x33221100;
 const int CONTROL_NACP_SIZE = 0x4000;
 const int CONTROL_FULL_SIZE = 0x24000;
 
-const int SERVER_VERSION = 1 << 16 | 0 << 8 | 0;
+const int SERVER_VERSION = 1 << 16 | 0 << 8 | 1;
 
 
 //returns cmd id
@@ -137,17 +137,78 @@ void SendCurrentApp(int socket)
     Result rc;
     u64 pid;
     u64 tid = 0;
+    int count;
     
+    u64* pids = new u64[256];
+    u32 pid_count;
+    Handle debug_handle;
+    DebugEventInfo *d = new DebugEventInfo;
+    
+    /*
     rc = pmdmntGetApplicationPid(&pid);
-    
     if (R_SUCCEEDED(rc))
     {
         rc = pminfoGetTitleId(&tid, pid);
         if (R_FAILED(rc))
             fatalSimple(MAKERESULT(Module_Discord, Error_GetProcessTid));
+    }*/
+    
+    /*
+    ------------------------------------------------------------------------------------------------------------------------------
+    for some reasons, the code above doesn't work on fws >= 5.x.x (pmdmntGetApplicationPid gives wrong infos) so I have to use a hackjob
+    also if you know what the issue is, PLEASE TELL ME, I'd really like to not do it like this
+    ------------------------------------------------------------------------------------------------------------------------------
+    */
+    
+    rc = svcGetProcessList(&pid_count, pids, 256);
+    if (R_FAILED(rc))
+    {
+        fatalSimple(MAKERESULT(Module_Discord, Error_GetPidList));
     }
     
+    for(int i = 0; i < pid_count; i++)
+    {
+        //applications processes always have PIDs > 0x80
+        if (pids[i] > 0x80)
+        {
+            //try debugging each application process
+            rc = svcDebugActiveProcess(&debug_handle, pids[i]);
+            if (R_SUCCEEDED(rc))
+            {
+                pid = pids[i];
+                
+                //attach process
+                while (R_SUCCEEDED(svcGetDebugEvent((u8 *)d, debug_handle)))
+                {
+                    if(d->type == DebugEventType::AttachProcess)
+                    {
+                        break;
+                    }
+                }
+                
+                tid = d->info.attach_process.title_id;
+                
+                rc = svcCloseHandle(debug_handle);
+                if(R_FAILED(rc))
+                {
+                    fatalSimple(MAKERESULT(Module_Discord, Error_CloseHandle));
+                }
+                
+                //avoid non-game titles like applets
+                if (tid < 0x0100000000010000)
+                {
+                    tid = 0;
+                    continue;
+                }
+                else break;
+            }
+        }
+    }
+    
+exit_send_current:
     SendBuffer(socket, ServerCommand::Normal, &tid, 8);
+    
+    delete[] pids;
 }
 
 void SendVersion(int socket)
