@@ -19,7 +19,7 @@ namespace SwitchRichPresence
             {
                 WebClient client = new WebClient();
                 byte[] data = client.DownloadData(LATEST_URL);
-                StringReader sr = new StringReader(Encoding.UTF8.GetString(data));
+                StringReader sr = new StringReader(Encoding.UTF8.GetString(data).Replace("\n", "\r\n"));
 
                 string latestVer = sr.ReadLine();
                 if (latestVer != APP_VERSION)
