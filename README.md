@@ -1,4 +1,4 @@
-# SwitchRichPresence
+# SwitchPresence
 <p align="center">
   A Nintendo Switch custom sysmodule for Discord Rich Presence.<br><br>
   <img src="https://raw.githubusercontent.com/Random0666/Useless-stuff/master/SwitchRichPresence/images/sysmodule.png" width="365" height="151"/>
