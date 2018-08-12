@@ -35,7 +35,7 @@ kip1=switch-rich-presence.kip
 
 # Known issues
 - The switch might hang on when getting into sleep mode or when turning it off. If that happens, hard shutdown your switch by pressing the POWER button for ~15 seconds.
-- Might not work with layeredFS or sys-ftp at the same time (not confirmed yet).
+- Doesn't work with layeredFS.
 
 # Other
 Again, huge thanks to everyone who contributed to the amazing documentation on [SwitchBrew](http://switchbrew.org/index.php?title=Main_Page).<br><br>
