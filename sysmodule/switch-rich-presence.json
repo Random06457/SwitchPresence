@@ -1,6 +1,6 @@
 {
-	"name": "sys-ftpd",
-	"title_id": "0x420000000000000E",
+	"name": "sys-discord",
+	"title_id": "0x420000000000001E",
 	"main_thread_stack_size": "0x20000",
 	"main_thread_priority": 49,
 	"default_cpu_id": 3,
