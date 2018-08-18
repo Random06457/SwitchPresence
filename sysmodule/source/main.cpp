@@ -162,18 +162,19 @@ int main(int argc, char **argv)
     (void)argc;
     (void)argv;
     
+    int server_fd, new_socket;
+    struct sockaddr_in address;
+    int addrlen = sizeof(address);
+    
+    //init socket
+    if (R_FAILED(socket_init(&server_fd, &address)))
+    {
+        fatalSimple(MAKERESULT(Module_Discord, Error_InitSocket));
+    }
+    
     while(true)
     {
-        int server_fd, new_socket;
-        struct sockaddr_in address;
-        int addrlen = sizeof(address);
         
-        
-        //init socket
-        if (R_FAILED(socket_init(&server_fd, &address)))
-        {
-            fatalSimple(MAKERESULT(Module_Discord, Error_InitSocket));
-        }
         //waiting for connection
         if (listen(server_fd, 3) < 0)
         {
@@ -187,7 +188,9 @@ int main(int argc, char **argv)
         
         StartReceiving(new_socket);
         close(new_socket);
-        socketExit();
     }
+    
+    
+    socketExit();
     return 0;
 }
