@@ -5,7 +5,7 @@ const int CLT_MAGIC = 0x33221100;
 const int CONTROL_NACP_SIZE = 0x4000;
 const int CONTROL_FULL_SIZE = 0x24000;
 
-const int SERVER_VERSION = 1 << 16 | 0 << 8 | 1;
+const int SERVER_VERSION = 1 << 16 | 0 << 8 | 2;
 
 
 //returns cmd id
@@ -169,7 +169,10 @@ void SendCurrentApp(int socket)
     for(int i = 0; i < pid_count; i++)
     {
         //applications processes always have PIDs > 0x80
-        if (pids[i] > 0x80)
+        //but atmosphere's pm don't recalculates the pids when a process is removed from the boot list
+        //so I put 70 to be safe (it now only might bne a problem is more than 10 processes are not booted or were killed)
+        //this can be removed but i'll be slower
+        if (pids[i] >= 0x70)
         {
             //try debugging each application process
             rc = svcDebugActiveProcess(&debug_handle, pids[i]);
