@@ -38,4 +38,4 @@ kip1=switch-rich-presence.kip
 
 # Other
 Again, huge thanks to everyone who contributed to the amazing documentation on [SwitchBrew](http://switchbrew.org/index.php?title=Main_Page).<br><br>
-If you have any question/problem, please contact me on discord : random#4657
+If you have any question/problem, please contact me on discord : random#6457
