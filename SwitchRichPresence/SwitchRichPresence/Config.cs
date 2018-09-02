@@ -12,9 +12,10 @@ namespace SwitchRichPresence
         private const string CONFIG_PATH = "config.txt";
 
         public string ClientID { get; set; } = "464720851976060940";
-        public string Ip { get; set; } = "192.168.0.22";
+        public string Ip { get; set; } = "192.168.0.XX";
         public bool ShowUser { get; set; } = true;
         public bool ShowTimer { get; set; } = true;
+        public string Icon { get; set; } = "icon";
 
         public Config()
         {
@@ -44,6 +45,9 @@ namespace SwitchRichPresence
                                 case "show_timer":
                                     ShowTimer = bool.Parse(parts[1]);
                                     break;
+                                case "icon":
+                                    Icon = parts[1];
+                                    break;
                             }
                         }
                         catch { }
@@ -59,6 +63,7 @@ namespace SwitchRichPresence
                 "ip=" + Ip,
                 "show_user=" + (ShowUser ? "true" : "false"),
                 "show_timer=" + (ShowTimer ? "true" : "false"),
+                "icon=" +  Icon,
             };
 
             File.WriteAllLines(CONFIG_PATH, lines);

@@ -43,6 +43,8 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_clientId = new System.Windows.Forms.TextBox();
+            this.textBox_overideswitch = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_icon)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +52,7 @@
             // pictureBox_icon
             // 
             this.pictureBox_icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_icon.Location = new System.Drawing.Point(12, 146);
+            this.pictureBox_icon.Location = new System.Drawing.Point(12, 155);
             this.pictureBox_icon.Name = "pictureBox_icon";
             this.pictureBox_icon.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -59,7 +61,7 @@
             // 
             // textBox_ip
             // 
-            this.textBox_ip.Location = new System.Drawing.Point(88, 53);
+            this.textBox_ip.Location = new System.Drawing.Point(94, 53);
             this.textBox_ip.Name = "textBox_ip";
             this.textBox_ip.Size = new System.Drawing.Size(118, 20);
             this.textBox_ip.TabIndex = 1;
@@ -75,7 +77,7 @@
             // 
             // button_connect
             // 
-            this.button_connect.Location = new System.Drawing.Point(98, 77);
+            this.button_connect.Location = new System.Drawing.Point(99, 103);
             this.button_connect.Name = "button_connect";
             this.button_connect.Size = new System.Drawing.Size(75, 23);
             this.button_connect.TabIndex = 3;
@@ -86,7 +88,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(118, 146);
+            this.label2.Location = new System.Drawing.Point(118, 163);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 4;
@@ -95,7 +97,7 @@
             // label_game
             // 
             this.label_game.AutoSize = true;
-            this.label_game.Location = new System.Drawing.Point(118, 163);
+            this.label_game.Location = new System.Drawing.Point(118, 184);
             this.label_game.Name = "label_game";
             this.label_game.Size = new System.Drawing.Size(16, 13);
             this.label_game.TabIndex = 5;
@@ -132,7 +134,7 @@
             this.checkBox_showUser.AutoSize = true;
             this.checkBox_showUser.Checked = true;
             this.checkBox_showUser.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showUser.Location = new System.Drawing.Point(12, 108);
+            this.checkBox_showUser.Location = new System.Drawing.Point(147, 132);
             this.checkBox_showUser.Name = "checkBox_showUser";
             this.checkBox_showUser.Size = new System.Drawing.Size(119, 17);
             this.checkBox_showUser.TabIndex = 7;
@@ -145,7 +147,7 @@
             this.checkBox_showTime.AutoSize = true;
             this.checkBox_showTime.Checked = true;
             this.checkBox_showTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showTime.Location = new System.Drawing.Point(12, 124);
+            this.checkBox_showTime.Location = new System.Drawing.Point(12, 132);
             this.checkBox_showTime.Name = "checkBox_showTime";
             this.checkBox_showTime.Size = new System.Drawing.Size(78, 17);
             this.checkBox_showTime.TabIndex = 8;
@@ -167,7 +169,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 35);
+            this.label3.Location = new System.Drawing.Point(35, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 11;
@@ -175,16 +177,34 @@
             // 
             // textBox_clientId
             // 
-            this.textBox_clientId.Location = new System.Drawing.Point(88, 32);
+            this.textBox_clientId.Location = new System.Drawing.Point(94, 77);
             this.textBox_clientId.Name = "textBox_clientId";
             this.textBox_clientId.Size = new System.Drawing.Size(118, 20);
             this.textBox_clientId.TabIndex = 10;
+            // 
+            // textBox_overideswitch
+            // 
+            this.textBox_overideswitch.Location = new System.Drawing.Point(94, 31);
+            this.textBox_overideswitch.Name = "textBox_overideswitch";
+            this.textBox_overideswitch.Size = new System.Drawing.Size(118, 20);
+            this.textBox_overideswitch.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Icon Override:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 262);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox_overideswitch);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_clientId);
             this.Controls.Add(this.linkLabel1);
@@ -228,6 +248,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_clientId;
+        private System.Windows.Forms.TextBox textBox_overideswitch;
+        private System.Windows.Forms.Label label4;
     }
 }
 
