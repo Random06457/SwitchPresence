@@ -41,6 +41,8 @@
             this.checkBox_showUser = new System.Windows.Forms.CheckBox();
             this.checkBox_showTime = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_clientId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_icon)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +50,7 @@
             // pictureBox_icon
             // 
             this.pictureBox_icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_icon.Location = new System.Drawing.Point(12, 126);
+            this.pictureBox_icon.Location = new System.Drawing.Point(12, 146);
             this.pictureBox_icon.Name = "pictureBox_icon";
             this.pictureBox_icon.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -57,7 +59,7 @@
             // 
             // textBox_ip
             // 
-            this.textBox_ip.Location = new System.Drawing.Point(88, 28);
+            this.textBox_ip.Location = new System.Drawing.Point(88, 53);
             this.textBox_ip.Name = "textBox_ip";
             this.textBox_ip.Size = new System.Drawing.Size(118, 20);
             this.textBox_ip.TabIndex = 1;
@@ -65,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 31);
+            this.label1.Location = new System.Drawing.Point(65, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 13);
             this.label1.TabIndex = 2;
@@ -73,7 +75,7 @@
             // 
             // button_connect
             // 
-            this.button_connect.Location = new System.Drawing.Point(98, 56);
+            this.button_connect.Location = new System.Drawing.Point(98, 77);
             this.button_connect.Name = "button_connect";
             this.button_connect.Size = new System.Drawing.Size(75, 23);
             this.button_connect.TabIndex = 3;
@@ -84,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(118, 126);
+            this.label2.Location = new System.Drawing.Point(118, 146);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 4;
@@ -93,7 +95,7 @@
             // label_game
             // 
             this.label_game.AutoSize = true;
-            this.label_game.Location = new System.Drawing.Point(118, 143);
+            this.label_game.Location = new System.Drawing.Point(118, 163);
             this.label_game.Name = "label_game";
             this.label_game.Size = new System.Drawing.Size(16, 13);
             this.label_game.TabIndex = 5;
@@ -121,7 +123,7 @@
             // exportIconsToolStripMenuItem
             // 
             this.exportIconsToolStripMenuItem.Name = "exportIconsToolStripMenuItem";
-            this.exportIconsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportIconsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.exportIconsToolStripMenuItem.Text = "Export icons";
             this.exportIconsToolStripMenuItem.Click += new System.EventHandler(this.exportIconsToolStripMenuItem_Click);
             // 
@@ -130,7 +132,7 @@
             this.checkBox_showUser.AutoSize = true;
             this.checkBox_showUser.Checked = true;
             this.checkBox_showUser.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showUser.Location = new System.Drawing.Point(12, 88);
+            this.checkBox_showUser.Location = new System.Drawing.Point(12, 108);
             this.checkBox_showUser.Name = "checkBox_showUser";
             this.checkBox_showUser.Size = new System.Drawing.Size(119, 17);
             this.checkBox_showUser.TabIndex = 7;
@@ -143,7 +145,7 @@
             this.checkBox_showTime.AutoSize = true;
             this.checkBox_showTime.Checked = true;
             this.checkBox_showTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showTime.Location = new System.Drawing.Point(12, 104);
+            this.checkBox_showTime.Location = new System.Drawing.Point(12, 124);
             this.checkBox_showTime.Name = "checkBox_showTime";
             this.checkBox_showTime.Size = new System.Drawing.Size(78, 17);
             this.checkBox_showTime.TabIndex = 8;
@@ -154,7 +156,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(231, 222);
+            this.linkLabel1.Location = new System.Drawing.Point(231, 242);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(35, 13);
             this.linkLabel1.TabIndex = 9;
@@ -162,11 +164,29 @@
             this.linkLabel1.Text = "About";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(35, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Client ID :";
+            // 
+            // textBox_clientId
+            // 
+            this.textBox_clientId.Location = new System.Drawing.Point(88, 32);
+            this.textBox_clientId.Name = "textBox_clientId";
+            this.textBox_clientId.Size = new System.Drawing.Size(118, 20);
+            this.textBox_clientId.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 242);
+            this.ClientSize = new System.Drawing.Size(270, 262);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox_clientId);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.checkBox_showTime);
             this.Controls.Add(this.checkBox_showUser);
@@ -206,6 +226,8 @@
         private System.Windows.Forms.CheckBox checkBox_showUser;
         private System.Windows.Forms.CheckBox checkBox_showTime;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox_clientId;
     }
 }
 

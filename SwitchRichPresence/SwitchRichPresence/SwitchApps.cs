@@ -25,7 +25,7 @@ namespace SwitchRichPresence
 
     public class SwitchApps : IDisposable
     {
-        private const int CLIENT_VERSION = 1 << 16 | 0 << 8 | 2; //different than the app version
+        private const int CLIENT_VERSION = 1 << 16 | 0 << 8 | 3; //different than the app version
         private Socket client;
         public List<TitleInfo> Applications { get; private set; } = new List<TitleInfo>();
 
@@ -79,7 +79,7 @@ namespace SwitchRichPresence
             Applications = new List<TitleInfo>();
             for (int i = 0; i < count; i++)
             {
-                Applications.Add(new TitleInfo(client, apps[i].TitleID, apps[i].AppType));
+                Applications.Add(new TitleInfo(client, apps[i].TitleID));
             }
         }
         private int GetServerVersion()

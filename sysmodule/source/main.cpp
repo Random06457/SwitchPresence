@@ -9,7 +9,7 @@
 #include <switch.h>
 
 #include "TcpCommand.h"
-#include "utils.h"
+#include "result.h"
 
 #define PORT 0xCAFE
 
@@ -21,7 +21,7 @@ extern "C" {
 
     u32 __nx_applet_type = AppletType_None;
 
-    #define INNER_HEAP_SIZE 0x240000
+    #define INNER_HEAP_SIZE 0x260000
     size_t nx_inner_heap_size = INNER_HEAP_SIZE;
     char   nx_inner_heap[INNER_HEAP_SIZE];
     
@@ -158,7 +158,6 @@ Result socket_init(int* server_fd, sockaddr_in* address)
 
 int main(int argc, char **argv)
 {
-    
     (void)argc;
     (void)argv;
     
@@ -174,7 +173,6 @@ int main(int argc, char **argv)
     
     while(true)
     {
-        
         //waiting for connection
         if (listen(server_fd, 3) < 0)
         {

@@ -10,7 +10,7 @@ namespace SwitchRichPresence
 {
     public class Updater
     {
-        public const string APP_VERSION = "1.0.2";
+        public const string APP_VERSION = "1.0.3";
         private const string LATEST_URL = "https://raw.githubusercontent.com/Random0666/Useless-stuff/master/SwitchRichPresence/latest.txt";
 
         public static void GetUpdate()

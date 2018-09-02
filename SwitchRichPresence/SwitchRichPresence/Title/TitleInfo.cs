@@ -13,22 +13,13 @@ using static SwitchRichPresence.TitleInfo;
 
 namespace SwitchRichPresence
 {
-    public enum ApplicationRecordType
-    {
-        Playing = 0,
-        Installing = 2,
-        GameCard = 3,
-        Installed = 4,
-    }
-
     public class ApplicationRecord
     {
         public ulong TitleID { get; private set; }
-        public ApplicationRecordType AppType { get; private set; }
         public ApplicationRecord(BinaryReader br)
         {
             TitleID = br.ReadUInt64();
-            AppType = (ApplicationRecordType)br.ReadByte();
+            br.ReadByte();
 
             br.BaseStream.Position += 0xF;
         }
@@ -45,12 +36,10 @@ namespace SwitchRichPresence
         public ulong TitleID { get; private set; }
         public Bitmap Icon { get; private set; }
         public NACP Metadata { get; private set; }
-        public ApplicationRecordType AppType { get; set; }
 
-        public TitleInfo(Socket socket, ulong tid, ApplicationRecordType type)
+        public TitleInfo(Socket socket, ulong tid)
         {
             client = socket;
-            AppType = type;
             TitleID = tid;
 
             GetControlData();

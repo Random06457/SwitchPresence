@@ -37,44 +37,9 @@ namespace SwitchRichPresence
             Disconnect      = 0xFF,
         }
 
-        //send the command type only
-        public static void SendCommand(Socket client, SendCommandType type)
+        private static byte[] ReceiveRaw(Socket client, int size)
         {
-            byte[] buffer = BitConverter.GetBytes(CLT_MAGIC | (byte)type);
-            int total = 0;
-            while (total < buffer.Length)
-            {
-                int count = client.Send(buffer, total, buffer.Length - total, SocketFlags.None);
-                if (count <= 0)
-                    throw new Exception("Error while receiving data !");
-                total += count;
-            }
-        }
-        public static void ReceiveConfirm(Socket client)
-        {
-            byte[] buffer = new byte[4];
-
-            int total = 0;
-            while (total < buffer.Length)
-            {
-                int count = client.Receive(buffer, total, buffer.Length - total, SocketFlags.None);
-                if (count <= 0)
-                    throw new Exception("Error while receiving data !");
-
-                total += count;
-            }
-
-            uint magic = BitConverter.ToUInt32(buffer, 0);
-
-            if ((magic & 0xFFFFFF00) != SRV_MAGIC)
-                throw new TcpCommandException(string.Format("Invalid Response magic : 0x{0} instead of 0x{1}", (magic & 0x00FFFFFF).ToString("X"), SRV_MAGIC.ToString("X")));
-        }
-
-        //validate command and return the buffer
-        public static byte[] ReceiveBuffer(Socket client, int size)
-        {
-            byte[] buffer = new byte[4 + size];//magic + buffer
-            byte[] data;
+            byte[] buffer = new byte[size];
 
             int total = 0;
             while (total < buffer.Length)
@@ -85,46 +50,55 @@ namespace SwitchRichPresence
                 total += count;
             }
 
-            //validate command
-            using (MemoryStream ms = new MemoryStream(buffer))
+            return buffer;
+        }
+        private static void SendRaw(Socket client, byte[] data)
+        {
+            int total = 0;
+            while (total < data.Length)
             {
-                BinaryReader br = new BinaryReader(ms);
-                uint magic = br.ReadUInt32();
-                data = br.ReadBytes(size);
-
-                //throws exceptions if needed
-                if ((magic & 0xFFFFFF00) != SRV_MAGIC)
-                    throw new TcpCommandException(string.Format("Invalid Response magic : 0x{0} instead of 0x{1}", (magic & 0x00FFFFFF).ToString("X"), SRV_MAGIC.ToString("X")));
+                int count = client.Send(data, total, data.Length - total, SocketFlags.None);
+                if (count < 0)
+                    throw new Exception("Error while receiving data !");
+                total += count;
             }
+        }
 
-            buffer = null;
+        //send cmd id
+        public static void SendCommand(Socket client, SendCommandType type)
+        {
+            byte[] buffer = BitConverter.GetBytes(CLT_MAGIC | (byte)type);
+            SendRaw(client, buffer);
+        }
+        public static void ReceiveConfirm(Socket client)
+        {
+            byte[] buffer = ReceiveRaw(client, 4);
 
-            GC.Collect();
+            uint magic = BitConverter.ToUInt32(buffer, 0);
+
+            if ((magic & 0xFFFFFF00) != SRV_MAGIC)
+                throw new TcpCommandException(string.Format("Invalid Response magic : 0x{0} instead of 0x{1}", (magic & 0x00FFFFFF).ToString("X"), SRV_MAGIC.ToString("X")));
+        }
+        
+        //header + data
+        public static byte[] ReceiveBuffer(Socket client, int size)
+        {
+            byte[] header = ReceiveRaw(client, 4);
+
+            //validate command
+            uint magic = BitConverter.ToUInt32(header, 0);
+            if ((magic & 0xFFFFFF00) != SRV_MAGIC)
+                throw new TcpCommandException(string.Format("Invalid Response magic : 0x{0} instead of 0x{1}", ((magic & 0xFFFFFF00)>>8).ToString("X"), (SRV_MAGIC>>8).ToString("X")));
+
+            byte[] data = ReceiveRaw(client, size);
+
             return data;
         }
-        //send data only
         public static void SendBuffer(Socket client, byte[] data)
         {
-            // send the buffer
-            byte[] cmdBuff = new byte[data.Length + 4];
-            using (MemoryStream ms = new MemoryStream(cmdBuff))
-            {
-                BinaryWriter bw = new BinaryWriter(ms);
-                bw.Write(CLT_MAGIC | (byte)SendCommandType.SendBuffer);
-                bw.Write(data);
-
-
-                byte[] buffer = ms.ToArray();
-                int total = 0;
-                while (total < buffer.Length)
-                {
-                    int count = client.Send(buffer, total, buffer.Length - total, SocketFlags.None);
-                    if (count < 0)
-                        throw new Exception("Error while receiving data !");
-                    total += count;
-                }
-            }
-            GC.Collect();
+            byte[] header = BitConverter.GetBytes(CLT_MAGIC | (byte)SendCommandType.SendBuffer);
+            SendRaw(client, header);
+            SendRaw(client, data);
         }
 
         //wrappers

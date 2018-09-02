@@ -95,6 +95,7 @@ namespace SwitchRichPresence
             Config config = new Config()
             {
                 Ip = textBox_ip.Text,
+                ClientID = textBox_clientId.Text,
                 ShowTimer = checkBox_showTime.Checked,
                 ShowUser = checkBox_showUser.Checked,
             };
@@ -105,6 +106,7 @@ namespace SwitchRichPresence
             Config config = new Config();
             appID = config.ClientID;
             textBox_ip.Text = config.Ip;
+            textBox_clientId.Text = config.ClientID;
             checkBox_showTime.Checked = config.ShowTimer;
             checkBox_showUser.Checked = config.ShowUser;
         }
@@ -156,7 +158,10 @@ namespace SwitchRichPresence
                     return;
                 }
 
+                SaveConfig();
+
                 textBox_ip.Enabled = false;
+                textBox_clientId.Enabled = false;
                 utilsToolStripMenuItem.Visible = true;
                 button_connect.Text = "Abort";
 
@@ -176,6 +181,7 @@ namespace SwitchRichPresence
             else //abort
             {
                 textBox_ip.Enabled = true;
+                textBox_clientId.Enabled = true;
                 utilsToolStripMenuItem.Visible = false;
                 button_connect.Text = "Connect";
                 
@@ -185,8 +191,6 @@ namespace SwitchRichPresence
                 CurrentPlaying = null;
                 apps = null;
                 UpdateInfo();
-
-                SaveConfig();
             }
         }
         
