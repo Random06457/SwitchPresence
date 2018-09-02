@@ -43,7 +43,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_clientId = new System.Windows.Forms.TextBox();
-            this.textBox_overideswitch = new System.Windows.Forms.TextBox();
+            this.textBox_overrideicon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_icon)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -182,12 +182,12 @@
             this.textBox_clientId.Size = new System.Drawing.Size(118, 20);
             this.textBox_clientId.TabIndex = 10;
             // 
-            // textBox_overideswitch
+            // textBox_overrideicon
             // 
-            this.textBox_overideswitch.Location = new System.Drawing.Point(94, 31);
-            this.textBox_overideswitch.Name = "textBox_overideswitch";
-            this.textBox_overideswitch.Size = new System.Drawing.Size(118, 20);
-            this.textBox_overideswitch.TabIndex = 12;
+            this.textBox_overrideicon.Location = new System.Drawing.Point(94, 31);
+            this.textBox_overrideicon.Name = "textBox_overrideicon";
+            this.textBox_overrideicon.Size = new System.Drawing.Size(118, 20);
+            this.textBox_overrideicon.TabIndex = 12;
             // 
             // label4
             // 
@@ -204,7 +204,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 262);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox_overideswitch);
+            this.Controls.Add(this.textBox_overrideicon);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_clientId);
             this.Controls.Add(this.linkLabel1);
@@ -248,7 +248,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_clientId;
-        private System.Windows.Forms.TextBox textBox_overideswitch;
+        private System.Windows.Forms.TextBox textBox_overrideicon;
         private System.Windows.Forms.Label label4;
     }
 }
