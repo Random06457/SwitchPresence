@@ -5,77 +5,62 @@ const int CLT_MAGIC = 0x33221100;
 const int CONTROL_NACP_SIZE = 0x4000;
 const int CONTROL_FULL_SIZE = 0x24000;
 
-const int SERVER_VERSION = 1 << 16 | 0 << 8 | 2;
+const int SERVER_VERSION = 1 << 16 | 0 << 8 | 3;
 
 
-//returns cmd id
-ClientCommand ReceiveCommand(int socket)
+void SendRaw(int socket, void* buff, size_t size)
 {
-    int ret;
-    char* buff = new char[256];
-    
-    int len = recv(socket , buff, 256, 0);
-    
-    if(len < 0)
-    {   
-        return ClientCommand::Disconnect;
-    }
-    
-    ret = *((int*)buff);
-    
-    if ((ret & 0xFFFFFF00) != CLT_MAGIC)
-    {
-        return ClientCommand::Disconnect;
-    }
-    
-    delete[] buff;
-    
-    return (ClientCommand)(ret & 0xFF);
-}
-
-void SendBuffer(int socket, ServerCommand cmd, void* data, size_t size)
-{
-    
-    u8* buff = new u8[size + 4];
-    
-    *((int*)buff) = SRV_MAGIC | (u8)cmd;
-    
-    if (data != nullptr)
-        memcpy(buff + 4, data, size);
-    
-    
     size_t total = 0;
-    while (total < size + 4) {
-        size_t count = send(socket, buff + total, (size + 4) - total, 0);
+    while (total < size)
+    {
+        size_t count = send(socket, (char*)buff + total, size - total, 0);
         if (count <= 0)
             fatalSimple(MAKERESULT(Module_Discord, Error_SendData));
         total += count;
     }
-    
-    delete[] buff;
 }
-
-void SendConfirm(int socket)
+void ReceiveRaw(int socket, void* buff, size_t size)
 {
-    SendBuffer(socket, ServerCommand::Confirm, nullptr, 0);
-}
-
-void ReceiveBuffer(int socket, void* out_buff, size_t size)
-{
-    int ret = 0;
-    u8* buff = new u8[size+4];
-    
     size_t total = 0;
-    
-    while (total < size+4)
+    while (total < size)
     {
-        size_t count = recv(socket, buff + total, (size + 4) - total, 0);
+        size_t count = recv(socket, (char*)buff + total, size - total, 0);
         if (count <= 0)
             fatalSimple(MAKERESULT(Module_Discord, Error_RecData));
         total += count;
     }
+}
+
+ClientCommand ReceiveCommand(int socket)
+{
+    int ret;
+    ReceiveRaw(socket, &ret, 4);
+    if ((ret & 0xFFFFFF00) != CLT_MAGIC)
+    {
+        return ClientCommand::Disconnect;
+    }
+    return (ClientCommand)(ret & 0xFF);
+}
+
+void SendBuffer(int socket, void* data, size_t size)
+{
+    int header = SRV_MAGIC | (u8)ServerCommand::Normal;
     
-    ret = *((int*)buff);
+    SendRaw(socket, &header, 4);
+    if (data != NULL)
+        SendRaw(socket, data, size);
+}
+
+void SendConfirm(int socket)
+{
+    int header = SRV_MAGIC | (u8)ServerCommand::Confirm;
+    SendRaw(socket, &header, 4);
+}
+
+void ReceiveBuffer(int socket, void* out_buff, size_t size)
+{
+    int ret;
+    ReceiveRaw(socket, &ret, 4);
     
     if ((ret & 0xFFFFFF00) != CLT_MAGIC)
     {
@@ -87,20 +72,13 @@ void ReceiveBuffer(int socket, void* out_buff, size_t size)
         fatalSimple(MAKERESULT(Module_Discord, Error_CmdIdNotSendBuff));
     }
     
-    memcpy(out_buff, buff + 4, size);
-    
-    delete[] buff;
+    ReceiveRaw(socket, out_buff, size);
 }
 
 void ReceiveConfirm(int socket)
 {  
-    int ret = 0;
-    int len = recv(socket , &ret, 4, 0);
-    
-    if(len < 0)
-    {
-        fatalSimple(MAKERESULT(Module_Discord, Error_RecData));
-    }
+    int ret;
+    ReceiveRaw(socket, &ret, 4);
     
     if ((ret & 0xFFFFFF00) != CLT_MAGIC)
     {
@@ -112,6 +90,9 @@ void ReceiveConfirm(int socket)
         fatalSimple(MAKERESULT(Module_Discord, Error_CmdIdNotConfirm));
     }
 }
+
+
+
 
 void SendAppList(int socket)
 {
@@ -125,9 +106,9 @@ void SendAppList(int socket)
         fatalSimple(MAKERESULT(Module_Discord, Error_ListAppFailed));
     }
     
-    SendBuffer(socket, ServerCommand::Normal, &count, 4);
+    SendBuffer(socket, &count, 4);
     ReceiveConfirm(socket);
-    SendBuffer(socket, ServerCommand::Normal, list, sizeof(NsApplicationRecord) * count);
+    SendBuffer(socket, list, sizeof(NsApplicationRecord) * count);
     
     delete[] list;
 }
@@ -171,7 +152,6 @@ void SendCurrentApp(int socket)
         //applications processes always have PIDs > 0x80
         //but atmosphere's pm don't recalculates the pids when a process is removed from the boot list
         //so I put 70 to be safe (it now only might bne a problem is more than 10 processes are not booted or were killed)
-        //this can be removed but i'll be slower
         if (pids[i] >= 0x70)
         {
             //try debugging each application process
@@ -209,7 +189,7 @@ void SendCurrentApp(int socket)
     }
     
 exit_send_current:
-    SendBuffer(socket, ServerCommand::Normal, &tid, 8);
+    SendBuffer(socket, &tid, 8);
     
     delete[] pids;
 }
@@ -217,7 +197,7 @@ exit_send_current:
 void SendVersion(int socket)
 {
     int ver = SERVER_VERSION;
-    SendBuffer(socket, ServerCommand::Normal, &ver, 4);
+    SendBuffer(socket, &ver, 4);
 }
 
 void SendActiveUser(int socket)
@@ -232,7 +212,7 @@ void SendActiveUser(int socket)
     if(R_FAILED(rc))
         fatalSimple(MAKERESULT(Module_Discord, Error_GetAciveUser));
     
-    SendBuffer(socket, ServerCommand::Normal, &account_selected, 1);
+    SendBuffer(socket, &account_selected, 1);
     
     if(account_selected)
     {
@@ -248,7 +228,7 @@ void SendActiveUser(int socket)
         
         accountProfileClose(&profile);
         
-        SendBuffer(socket, ServerCommand::Normal, profilebase.username, 0x20);
+        SendBuffer(socket, profilebase.username, 0x20);
     }
 }
 
@@ -273,7 +253,7 @@ void SendControlData(int socket)
         fatalSimple(MAKERESULT(Module_Discord, Error_InvalidControlSize));
     }
     
-    SendBuffer(socket, ServerCommand::Normal, control, sizeof(NsApplicationControlData));
+    SendBuffer(socket, control, sizeof(NsApplicationControlData));
     
     delete control;
 }
