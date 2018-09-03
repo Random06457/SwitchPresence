@@ -48,7 +48,7 @@ namespace SwitchRichPresence
                     {
                         details = "Playing " + CurrentPlaying.Metadata.GetLanguage().ApplicationName,
                         smallImageKey = "icon",
-                        smallImageText = "SwitchPresence Sysmodule",
+                        smallImageText = "Rich Presense Sysmodule",
                         largeImageKey = CurrentPlaying.Metadata.BaseTitleId.ToLower(),
                         largeImageText = CurrentPlaying.Metadata.GetLanguage().ApplicationName,
                         startTimestamp = startTime,
@@ -215,7 +215,7 @@ namespace SwitchRichPresence
                 textBox_clientId.Enabled = true;
                 utilsToolStripMenuItem.Visible = false;
                 button_connect.Text = "Connect";
-
+                
                 UpdatePlaying.Abort();
                 apps.Dispose();
                 UpdatePlaying = null;
@@ -224,7 +224,7 @@ namespace SwitchRichPresence
                 UpdateInfo();
             }
         }
-
+        
         private void exportIconsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FolderSelectDialog fbox = new FolderSelectDialog();
@@ -286,9 +286,10 @@ namespace SwitchRichPresence
 
         private void textBox_overridebicon_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
-
+   
     }
 
  }
+    
