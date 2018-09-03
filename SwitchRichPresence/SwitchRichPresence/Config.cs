@@ -15,8 +15,7 @@ namespace SwitchRichPresence
         public string Ip { get; set; } = "192.168.0.XX";
         public bool ShowUser { get; set; } = true;
         public bool ShowTimer { get; set; } = true;
-        public string SIcon { get; set; } = "";
-        public string BIcon { get; set; } = "";
+        public string Icon { get; set; } = "icon";
 
         public Config()
         {
@@ -46,11 +45,8 @@ namespace SwitchRichPresence
                                 case "show_timer":
                                     ShowTimer = bool.Parse(parts[1]);
                                     break;
-                                case "sicon":
-                                    SIcon = parts[1];
-                                    break;
-                                case "bicon":
-                                    BIcon = parts[1];
+                                case "icon":
+                                    Icon = parts[1];
                                     break;
                             }
                         }
@@ -67,8 +63,7 @@ namespace SwitchRichPresence
                 "ip=" + Ip,
                 "show_user=" + (ShowUser ? "true" : "false"),
                 "show_timer=" + (ShowTimer ? "true" : "false"),
-                "sicon=" +  SIcon,
-                "bicon=" + BIcon,
+                "icon=" +  Icon,
             };
 
             File.WriteAllLines(CONFIG_PATH, lines);

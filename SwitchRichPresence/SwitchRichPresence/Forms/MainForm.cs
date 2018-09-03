@@ -44,41 +44,16 @@ namespace SwitchRichPresence
                     startTime = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                     CurrentTid = CurrentPlaying.TitleID;
 
-                        discord.presence = new DiscordRpc.RichPresence()
+                    discord.presence = new DiscordRpc.RichPresence()
                     {
                         details = "Playing " + CurrentPlaying.Metadata.GetLanguage().ApplicationName,
-                        smallImageKey = "icon",
+                        smallImageKey = textBox_overrideicon.Text,
                         smallImageText = "Rich Presense Sysmodule",
                         largeImageKey = CurrentPlaying.Metadata.BaseTitleId.ToLower(),
                         largeImageText = CurrentPlaying.Metadata.GetLanguage().ApplicationName,
                         startTimestamp = startTime,
                     };
-                }
-                if (string.IsNullOrWhiteSpace(textBox_overridesicon.Text))
-                {
-                    discord.presence.smallImageKey = "icon";
-                    SaveConfig();
-                }
-                else
-                {
-                    discord.presence.smallImageKey = textBox_overridesicon.Text;
-                    SaveConfig();
-                }
 
-                if (string.IsNullOrWhiteSpace(textBox_overridebicon.Text) && (CurrentPlaying == null))
-                {
-                    discord.presence.largeImageKey = "";
-                    SaveConfig();
-                }
-                else if (string.IsNullOrWhiteSpace(textBox_overridebicon.Text) && (CurrentPlaying != null))
-                {
-                    discord.presence.largeImageKey = CurrentPlaying.Metadata.BaseTitleId.ToLower();
-                    SaveConfig();
-                }
-                else if (CurrentPlaying != null)
-                {
-                    discord.presence.largeImageKey = textBox_overridebicon.Text;
-                    SaveConfig();
                 }
 
                 //update user
@@ -115,8 +90,6 @@ namespace SwitchRichPresence
             }
             DiscordRpc.UpdatePresence(discord.presence);
         }
-
-
         private void SaveConfig()
         {
             Config config = new Config()
@@ -125,8 +98,7 @@ namespace SwitchRichPresence
                 ClientID = textBox_clientId.Text,
                 ShowTimer = checkBox_showTime.Checked,
                 ShowUser = checkBox_showUser.Checked,
-                SIcon = textBox_overridesicon.Text,
-                BIcon = textBox_overridebicon.Text
+                Icon = textBox_overrideicon.Text,
             };
             config.Save();
         }
@@ -138,8 +110,7 @@ namespace SwitchRichPresence
             textBox_clientId.Text = config.ClientID;
             checkBox_showTime.Checked = config.ShowTimer;
             checkBox_showUser.Checked = config.ShowUser;
-            textBox_overridesicon.Text = config.SIcon;
-            textBox_overridebicon.Text = config.BIcon;
+            textBox_overrideicon.Text = config.Icon;
         }
 
         public MainForm()
@@ -273,23 +244,6 @@ namespace SwitchRichPresence
             AboutForm form = new AboutForm();
             form.ShowDialog();
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_ip_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox_overridebicon_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-   
+        
     }
-
- }
-    
+}
