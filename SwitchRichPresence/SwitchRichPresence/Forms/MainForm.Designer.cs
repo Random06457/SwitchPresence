@@ -35,16 +35,18 @@
             this.button_connect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label_game = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox_showUser = new System.Windows.Forms.CheckBox();
             this.checkBox_showTime = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_clientId = new System.Windows.Forms.TextBox();
-            this.textBox_overrideicon = new System.Windows.Forms.TextBox();
+            this.textBox_overridesicon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBox_overridebicon = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.utilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_icon)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             // pictureBox_icon
             // 
             this.pictureBox_icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_icon.Location = new System.Drawing.Point(12, 155);
+            this.pictureBox_icon.Location = new System.Drawing.Point(14, 329);
             this.pictureBox_icon.Name = "pictureBox_icon";
             this.pictureBox_icon.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -61,23 +63,25 @@
             // 
             // textBox_ip
             // 
-            this.textBox_ip.Location = new System.Drawing.Point(94, 53);
+            this.textBox_ip.Location = new System.Drawing.Point(120, 37);
             this.textBox_ip.Name = "textBox_ip";
             this.textBox_ip.Size = new System.Drawing.Size(118, 20);
             this.textBox_ip.TabIndex = 1;
+            this.textBox_ip.TextChanged += new System.EventHandler(this.textBox_ip_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 56);
+            this.label1.Location = new System.Drawing.Point(91, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "IP :";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button_connect
             // 
-            this.button_connect.Location = new System.Drawing.Point(99, 103);
+            this.button_connect.Location = new System.Drawing.Point(139, 89);
             this.button_connect.Name = "button_connect";
             this.button_connect.Size = new System.Drawing.Size(75, 23);
             this.button_connect.TabIndex = 3;
@@ -88,30 +92,112 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(118, 163);
+            this.label2.Location = new System.Drawing.Point(121, 329);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Playing :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_game
             // 
             this.label_game.AutoSize = true;
-            this.label_game.Location = new System.Drawing.Point(118, 184);
+            this.label_game.Location = new System.Drawing.Point(121, 351);
             this.label_game.Name = "label_game";
             this.label_game.Size = new System.Drawing.Size(16, 13);
             this.label_game.TabIndex = 5;
             this.label_game.Text = "...";
+            this.label_game.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // menuStrip1
+            // checkBox_showUser
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.utilsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(270, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
+            this.checkBox_showUser.AutoSize = true;
+            this.checkBox_showUser.Checked = true;
+            this.checkBox_showUser.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_showUser.Location = new System.Drawing.Point(14, 254);
+            this.checkBox_showUser.Name = "checkBox_showUser";
+            this.checkBox_showUser.Size = new System.Drawing.Size(119, 17);
+            this.checkBox_showUser.TabIndex = 7;
+            this.checkBox_showUser.Text = "Show selected user";
+            this.checkBox_showUser.UseVisualStyleBackColor = true;
+            this.checkBox_showUser.CheckedChanged += new System.EventHandler(this.checkBox_showUser_CheckedChanged);
+            // 
+            // checkBox_showTime
+            // 
+            this.checkBox_showTime.AutoSize = true;
+            this.checkBox_showTime.Checked = true;
+            this.checkBox_showTime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_showTime.Location = new System.Drawing.Point(14, 219);
+            this.checkBox_showTime.Name = "checkBox_showTime";
+            this.checkBox_showTime.Size = new System.Drawing.Size(78, 17);
+            this.checkBox_showTime.TabIndex = 8;
+            this.checkBox_showTime.Text = "Show timer";
+            this.checkBox_showTime.UseVisualStyleBackColor = true;
+            this.checkBox_showTime.CheckedChanged += new System.EventHandler(this.checkBox_showTime_CheckedChanged);
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(291, 416);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(35, 13);
+            this.linkLabel1.TabIndex = 9;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "About";
+            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(61, 70);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Client ID :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox_clientId
+            // 
+            this.textBox_clientId.Location = new System.Drawing.Point(120, 63);
+            this.textBox_clientId.Name = "textBox_clientId";
+            this.textBox_clientId.Size = new System.Drawing.Size(118, 20);
+            this.textBox_clientId.TabIndex = 10;
+            // 
+            // textBox_overridesicon
+            // 
+            this.textBox_overridesicon.Location = new System.Drawing.Point(208, 251);
+            this.textBox_overridesicon.Name = "textBox_overridesicon";
+            this.textBox_overridesicon.Size = new System.Drawing.Size(118, 20);
+            this.textBox_overridesicon.TabIndex = 12;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(219, 235);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Small Icon override";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox_overridebicon
+            // 
+            this.textBox_overridebicon.Location = new System.Drawing.Point(208, 212);
+            this.textBox_overridebicon.Name = "textBox_overridebicon";
+            this.textBox_overridebicon.Size = new System.Drawing.Size(118, 20);
+            this.textBox_overridebicon.TabIndex = 14;
+            this.textBox_overridebicon.TextChanged += new System.EventHandler(this.textBox_overridebicon_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(219, 196);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Big Icon override";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // utilsToolStripMenuItem
             // 
@@ -129,82 +215,25 @@
             this.exportIconsToolStripMenuItem.Text = "Export icons";
             this.exportIconsToolStripMenuItem.Click += new System.EventHandler(this.exportIconsToolStripMenuItem_Click);
             // 
-            // checkBox_showUser
+            // menuStrip1
             // 
-            this.checkBox_showUser.AutoSize = true;
-            this.checkBox_showUser.Checked = true;
-            this.checkBox_showUser.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showUser.Location = new System.Drawing.Point(147, 132);
-            this.checkBox_showUser.Name = "checkBox_showUser";
-            this.checkBox_showUser.Size = new System.Drawing.Size(119, 17);
-            this.checkBox_showUser.TabIndex = 7;
-            this.checkBox_showUser.Text = "Show selected user";
-            this.checkBox_showUser.UseVisualStyleBackColor = true;
-            this.checkBox_showUser.CheckedChanged += new System.EventHandler(this.checkBox_showUser_CheckedChanged);
-            // 
-            // checkBox_showTime
-            // 
-            this.checkBox_showTime.AutoSize = true;
-            this.checkBox_showTime.Checked = true;
-            this.checkBox_showTime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_showTime.Location = new System.Drawing.Point(12, 132);
-            this.checkBox_showTime.Name = "checkBox_showTime";
-            this.checkBox_showTime.Size = new System.Drawing.Size(78, 17);
-            this.checkBox_showTime.TabIndex = 8;
-            this.checkBox_showTime.Text = "Show timer";
-            this.checkBox_showTime.UseVisualStyleBackColor = true;
-            this.checkBox_showTime.CheckedChanged += new System.EventHandler(this.checkBox_showTime_CheckedChanged);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(231, 242);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(35, 13);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "About";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Client ID :";
-            // 
-            // textBox_clientId
-            // 
-            this.textBox_clientId.Location = new System.Drawing.Point(94, 77);
-            this.textBox_clientId.Name = "textBox_clientId";
-            this.textBox_clientId.Size = new System.Drawing.Size(118, 20);
-            this.textBox_clientId.TabIndex = 10;
-            // 
-            // textBox_overrideicon
-            // 
-            this.textBox_overrideicon.Location = new System.Drawing.Point(94, 31);
-            this.textBox_overrideicon.Name = "textBox_overrideicon";
-            this.textBox_overrideicon.Size = new System.Drawing.Size(118, 20);
-            this.textBox_overrideicon.TabIndex = 12;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Icon Override:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.utilsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(338, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 262);
+            this.ClientSize = new System.Drawing.Size(338, 440);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox_overridebicon);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox_overrideicon);
+            this.Controls.Add(this.textBox_overridesicon);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_clientId);
             this.Controls.Add(this.linkLabel1);
@@ -222,8 +251,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Sys-Discord Client";
+            this.Text = "SwitchPresence Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_icon)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -240,16 +270,18 @@
         private System.Windows.Forms.Button button_connect;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_game;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem utilsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportIconsToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBox_showUser;
         private System.Windows.Forms.CheckBox checkBox_showTime;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_clientId;
-        private System.Windows.Forms.TextBox textBox_overrideicon;
+        private System.Windows.Forms.TextBox textBox_overridesicon;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox_overridebicon;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem utilsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportIconsToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
 
