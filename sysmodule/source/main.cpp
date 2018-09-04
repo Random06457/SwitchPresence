@@ -171,17 +171,21 @@ int main(int argc, char **argv)
         fatalSimple(MAKERESULT(Module_Discord, Error_InitSocket));
     }
     
-    while(true)
-    {
-        //waiting for connection
+	//waiting for connection
         if (listen(server_fd, 3) < 0)
         {
             fatalSimple(MAKERESULT(Module_Discord, Error_Listen));
         }
+    while(true)
+    {
+
         //Accepting;
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0)
         {
-            fatalSimple(MAKERESULT(Module_Discord, Error_Accepting));
+            if (listen(server_fd, 3) < 0)
+        {
+            fatalSimple(MAKERESULT(Module_Discord, Error_Listen));
+        }
         }
         
         StartReceiving(new_socket);
