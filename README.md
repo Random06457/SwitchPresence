@@ -1,3 +1,6 @@
+<h2>Warning: This Project is very outdated and no longer maintained! Please use this instead: https://github.com/SunTheCourier/SwitchPresence-Rewritten</h2>
+<br>
+
 # SwitchPresence
 <p align="center">
   A Nintendo Switch custom sysmodule for Discord Rich Presence.<br><br>
